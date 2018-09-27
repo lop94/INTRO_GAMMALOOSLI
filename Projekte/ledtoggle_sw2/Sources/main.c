@@ -34,6 +34,8 @@
 #include "BitIoLdd1.h"
 #include "WAIT1.h"
 #include "MCUC1.h"
+#include "LED2.h"
+#include "BitIoLdd2.h"
 /* Including shared modules, which are used for whole project */
 #include "PE_Types.h"
 #include "PE_Error.h"
@@ -55,6 +57,7 @@ int main(void)
   /* For example: for(;;) { } */
   for(;;){
 	  LED1_NegVal();
+	  LED2_NegVal();
 	  WAIT1_Waitms(200);
 	 // LED1_ClrVal(); //on
 	 // LED1_SetVal(); //off

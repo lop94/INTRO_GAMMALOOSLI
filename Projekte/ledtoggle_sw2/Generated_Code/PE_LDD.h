@@ -6,7 +6,7 @@
 **     Version     : Component 01.014, Driver 01.04, CPU db: 3.00.000
 **     Repository  : Kinetis
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2018-09-27, 15:35, # CodeGen: 3
+**     Date/Time   : 2018-09-27, 15:51, # CodeGen: 5
 **     Abstract    :
 **
 **     Settings    :
@@ -65,6 +65,8 @@
 #include "BitIoLdd1.h"
 #include "WAIT1.h"
 #include "MCUC1.h"
+#include "LED2.h"
+#include "BitIoLdd2.h"
 
 
 /*

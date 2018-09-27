@@ -52,7 +52,7 @@ all: ledtoggle_sw2.elf secondary-outputs
 ledtoggle_sw2.elf: $(OBJS) $(USER_OBJS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: Cross ARM C++ Linker'
-	arm-none-eabi-g++ -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections  -g3 -T "C:/Users/Luca Gamma/Documents/HSLU/5. Semester/INTRO/Kinetis/wsp_intro/ledtoggle_sw2/Project_Settings/Linker_Files/ProcessorExpert.ld" -Xlinker --gc-sections -L"C:/Users/Luca Gamma/Documents/HSLU/5. Semester/INTRO/Kinetis/wsp_intro/ledtoggle_sw2/Project_Settings/Linker_Files" -Wl,-Map,"ledtoggle_sw2.map" -specs=nano.specs -specs=nosys.specs -o "ledtoggle_sw2.elf" $(OBJS) $(USER_OBJS) $(LIBS)
+	arm-none-eabi-g++ -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections  -g3 -T "C:/Users/Patrick Loosli/Desktop/HS18/INTRO/INTRO_GAMMALOOSLI/Projekte/ledtoggle_sw2/Project_Settings/Linker_Files/ProcessorExpert.ld" -Xlinker --gc-sections -L"C:/Users/Patrick Loosli/Desktop/HS18/INTRO/INTRO_GAMMALOOSLI/Projekte/ledtoggle_sw2/Project_Settings/Linker_Files" -Wl,-Map,"ledtoggle_sw2.map" -specs=nano.specs -specs=nosys.specs -o "ledtoggle_sw2.elf" $(OBJS) $(USER_OBJS) $(LIBS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 

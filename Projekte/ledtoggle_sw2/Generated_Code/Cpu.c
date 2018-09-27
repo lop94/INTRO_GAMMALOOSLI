@@ -8,7 +8,7 @@
 **     Repository  : Kinetis
 **     Datasheet   : K22P144M100SF5RM, Rev.2, Apr 2013
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2018-09-27, 15:35, # CodeGen: 3
+**     Date/Time   : 2018-09-27, 15:51, # CodeGen: 5
 **     Abstract    :
 **
 **     Settings    :
@@ -308,6 +308,8 @@
 #include "BitIoLdd1.h"
 #include "WAIT1.h"
 #include "MCUC1.h"
+#include "LED2.h"
+#include "BitIoLdd2.h"
 #include "PE_Types.h"
 #include "PE_Error.h"
 #include "PE_Const.h"
@@ -527,6 +529,8 @@ void PE_low_level_init(void)
   /* ### McuLibConfig "MCUC1" init code ... */
   MCUC1_Init();
   WAIT1_Init(); /* ### Wait "WAIT1" init code ... */
+  /* ### BitIO_LDD "BitIoLdd2" component auto initialization. Auto initialization feature can be disabled by component property "Auto initialization". */
+  (void)BitIoLdd2_Init(NULL);
   /* Enable interrupts of the given priority level */
   Cpu_SetBASEPRI(0U);
 }
