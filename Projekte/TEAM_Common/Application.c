@@ -178,15 +178,20 @@ static void APP_AdoptToHardware(void) {
   PORT_PDD_SetPinPullEnable(PORTC_BASE_PTR, 17, PORT_PDD_PULL_ENABLE);
 #endif
 }
-
+/* For HardFault Fault*/
+//void write_to_rom(void) {
+//  *((int*)0x0) = 10; /* tries to write to address zero */
+//}
 void APP_Start(void) {
   PL_Init();
   APP_AdoptToHardware();
+
   __asm volatile("cpsie i"); /* enable interrupts */
-
+  EVNT_SetEvent(EVNT_STARTUP);
   for(;;) {
-
-
+	  EVNT_HandleEvent(APP_EventHandler, TRUE);
+	  EVNT_SetEvent(EVNT_LED_HEARTBEAT);
+//	  write_to_rom();	//For HardFault Fault
   }
 }
 
