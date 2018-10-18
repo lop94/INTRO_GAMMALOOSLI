@@ -95,6 +95,43 @@ void APP_EventHandler(EVNT_Handle event) {
 #if PL_CONFIG_NOF_KEYS>=1
   case EVNT_SW1_PRESSED:
     BtnMsg(1, "pressed");
+    LED1_Neg();
+     break;
+#endif
+#if PL_CONFIG_NOF_KEYS>=2
+  case EVNT_SW2_PRESSED:
+    BtnMsg(2, "pressed");
+    LED1_Neg();
+     break;
+#endif
+#if PL_CONFIG_NOF_KEYS>=3
+  case EVNT_SW3_PRESSED:
+    BtnMsg(3, "pressed");
+    LED1_Neg();
+     break;
+#endif
+#if PL_CONFIG_NOF_KEYS>=4
+  case EVNT_SW4_PRESSED:
+    BtnMsg(4, "pressed");
+    LED1_Neg();
+     break;
+#endif
+#if PL_CONFIG_NOF_KEYS>=5
+  case EVNT_SW5_PRESSED:
+    BtnMsg(5, "pressed");
+    LED1_Neg();
+     break;
+#endif
+#if PL_CONFIG_NOF_KEYS>=6
+  case EVNT_SW6_PRESSED:
+    BtnMsg(6, "pressed");
+    LED1_Neg();
+     break;
+#endif
+#if PL_CONFIG_NOF_KEYS>=7
+  case EVNT_SW7_PRESSED:
+    BtnMsg(7, "pressed");
+    LED1_Neg();
      break;
 #endif
     default:
@@ -189,8 +226,10 @@ void APP_Start(void) {
   __asm volatile("cpsie i"); /* enable interrupts */
   EVNT_SetEvent(EVNT_STARTUP);
   for(;;) {
-	  EVNT_HandleEvent(APP_EventHandler, TRUE);
-	  EVNT_SetEvent(EVNT_LED_HEARTBEAT);
+//	  EVNT_HandleEvent(APP_EventHandler, TRUE);
+//	  EVNT_SetEvent(EVNT_LED_HEARTBEAT);
+	  KEY_Scan();
+	  EVNT_HandleEvent(APP_EventHandler,TRUE);
 //	  write_to_rom();	//For HardFault Fault
   }
 }
