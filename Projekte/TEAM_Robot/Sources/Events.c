@@ -37,6 +37,7 @@ extern "C" {
 /* User includes (#include below this line is not maintained by Processor Expert) */
 #include "LEDPin1.h"
 #include "Keys.h"
+#include "Buzzer.h"
 
 /*
 ** ===================================================================
@@ -76,6 +77,7 @@ void TI1_OnInterrupt(void)
 {
   /* Write your code here ... */
 //	LEDPin1_NegVal();
+	TRG_AddTick();
 }
 
 /*

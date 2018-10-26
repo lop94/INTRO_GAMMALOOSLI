@@ -15,6 +15,7 @@
 #include "KeyDebounce.h"
 #include "CLS1.h"
 #include "KIN1.h"
+#include "Trigger.h"
 #if PL_CONFIG_HAS_KEYS
   #include "Keys.h"
 #endif
@@ -221,15 +222,17 @@ static void APP_AdoptToHardware(void) {
 //}
 void APP_Start(void) {
   PL_Init();
+  TRG_Init();
+  BUZ_Init();
   APP_AdoptToHardware();
-
+  BUZ_Beep(500,1000);
   __asm volatile("cpsie i"); /* enable interrupts */
   EVNT_SetEvent(EVNT_STARTUP);
   for(;;) {
-//	  EVNT_HandleEvent(APP_EventHandler, TRUE);
+
+	  EVNT_HandleEvent(APP_EventHandler, TRUE);
 //	  EVNT_SetEvent(EVNT_LED_HEARTBEAT);
-	  KEY_Scan();
-	  EVNT_HandleEvent(APP_EventHandler,TRUE);
+	  //EVNT_HandleEvent(APP_EventHandler,TRUE);
 //	  write_to_rom();	//For HardFault Fault
   }
 }

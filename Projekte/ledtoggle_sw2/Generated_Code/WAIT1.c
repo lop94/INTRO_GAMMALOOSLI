@@ -7,7 +7,7 @@
 **     Version     : Component 01.082, Driver 01.00, CPU db: 3.00.000
 **     Repository  : My Components
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2018-09-27, 15:35, # CodeGen: 3
+**     Date/Time   : 2018-10-25, 15:35, # CodeGen: 9
 **     Abstract    :
 **          Implements busy waiting routines.
 **     Settings    :
