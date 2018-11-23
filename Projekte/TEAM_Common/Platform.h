@@ -73,6 +73,10 @@
 #define PL_CONFIG_HAS_RADIO             (1 && !defined(PL_LOCAL_CONFIG_HAS_RADIO_DISABLED))
 #define PL_CONFIG_HAS_USB_CDC           (1 && !defined(PL_LOCAL_CONFIG_HAS_USB_CDC_DISABLED))
 
+/* Extra Games */
+
+#define PL_CONFIG_HAS_ZORK          	(1 && !defined(PL_LOCAL_CONFIG_ZORK_DISABLED))
+
 /* remote controller specific features */
 #define PL_CONFIG_HAS_LCD               (1 && !defined(PL_LOCAL_CONFIG_HAS_LCD_DISABLED))
 #define PL_CONFIG_HAS_LCD_MENU          (1 && !defined(PL_LOCAL_CONFIG_HAS_LCD_MENU_DISABLED) && PL_CONFIG_HAS_LCD)

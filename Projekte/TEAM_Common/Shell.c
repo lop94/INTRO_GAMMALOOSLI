@@ -92,6 +92,11 @@
 #if CLS1_DEFAULT_SERIAL
   #error "Default is RTT. Disable any Shell default connection in the component properties, as we are setting it a runtime!"
 #endif
+
+#if PL_CONFIG_HAS_ZORK
+  #include "Zork.h"
+#endif
+
 #define SHELL_CONFIG_HAS_SHELL_UART  (1 && !PL_CONFIG_BOARD_IS_ROBO_V1) /* use AsynchroSerial, V1 uses the Bluetooth on the UART */
 #define SHELL_CONFIG_HAS_SHELL_RTT   (1 && PL_CONFIG_HAS_SEGGER_RTT) /* use SEGGER RTT */
 #define SHELL_CONFIG_HAS_SHELL_CDC   (1 && PL_CONFIG_HAS_USB_CDC) /* use USB CDC */
@@ -101,7 +106,7 @@
   * UART Standard I/O
   * ******************************************************************/
   #include "AS1.h"
-
+//TaskHandle_t ShellTaskHandle = NULL;
   static bool UART_KeyPressed(void) {
     return AS1_GetCharsInRxBuf()!=0;
   }
@@ -348,10 +353,19 @@ static uint8_t SHELL_ParseCommand(const unsigned char *cmd, bool *handled, const
     if (UTIL1_xatoi(&p, &val)==ERR_OK) {
       SHELL_val = val;
       *handled = TRUE;
-    } else {
-      return ERR_FAILED; /* wrong format of command? */
     }
+    else {
+        return ERR_FAILED; /* wrong format of command? */
+    }
+#if PL_CONFIG_HAS_ZORK
   }
+  else if (UTIL1_strncmp ((char*) cmd, "Shell play Zork", sizeof("Shell play Zork")-1)==0){
+	  *handled = TRUE;
+	  Zork_Init();
+	  return ERR_OK;
+#endif
+  }
+
   return ERR_OK;
 }
 
@@ -382,10 +396,22 @@ static void ShellTask(void *pvParameters) {
 #if PL_CONFIG_HAS_SHELL_QUEUE && PL_CONFIG_SQUEUE_SINGLE_CHAR
     {
         /*! \todo Handle shell queue */
+    	unsigned char ch;
+
+    	while((ch = SQUEUE_ReceiveChar()) && (ch != '\0')){
+    		ios[0].stdio -> stdOut(ch);
+    	}
     }
 #elif PL_CONFIG_HAS_SHELL_QUEUE /* !PL_CONFIG_SQUEUE_SINGLE_CHAR */
     {
       /*! \todo Handle shell queue */
+    	const unsigned char *msg;
+
+    	msg = SQUEUE_ReceiveMessage();
+    	if(msg!=NULL){
+    		CLS1_SendStr(msg, CLS1_GetStdio()) -> stdOut);
+    	}
+    	vPortFree((void*)msg);
    }
 #endif /* PL_CONFIG_HAS_SHELL_QUEUE */
     vTaskDelay(pdMS_TO_TICKS(10));
