@@ -493,6 +493,7 @@ void PID_Init(void) {
   config.posRightConfig.lastError = config.posLeftConfig.lastError;
   config.posRightConfig.integral = config.posLeftConfig.integral;
   config.posRightConfig.maxSpeedPercent = config.posLeftConfig.maxSpeedPercent;
+  PID_LoadSettingsFromFlash();
 }
 
 #endif /* PL_CONFIG_HAS_PID */

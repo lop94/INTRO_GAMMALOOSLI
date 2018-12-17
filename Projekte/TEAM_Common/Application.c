@@ -16,6 +16,9 @@
 #include "CLS1.h"
 #include "KIN1.h"
 #include "Trigger.h"
+#if PL_CONFIG_HAS_PID
+  #include "pid.h"
+#endif
 #if PL_CONFIG_HAS_KEYS
   #include "Keys.h"
 #endif
@@ -98,6 +101,7 @@ void APP_EventHandler(EVNT_Handle event) {
   case EVNT_SW1_PRESSED:
     BtnMsg(1, "pressed");
     LED1_Neg();
+    LF_StartFollowing();
      break;
 #endif
 #if PL_CONFIG_NOF_KEYS>=2
@@ -255,7 +259,6 @@ void APP_Start(void) {
 	}
   /***** Start Betriebssystem *****/
   vTaskStartScheduler();
-
 
   for(;;) {
 
